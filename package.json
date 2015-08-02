@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "(cd rust && cargo build --release)"
+    "build-rust": "(cd rust && cargo build --release)",
+    "build-cpp": "(cd src/addon && node-gyp configure build)",
+    "build": "npm run build-rust && npm ru build-cpp"
   },
   "author": "",
   "license": "ISC",
