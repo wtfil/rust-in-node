@@ -6,7 +6,8 @@
   "scripts": {
     "build-rust": "(cd rust && cargo build --release)",
     "build-cpp": "(cd src/native-cpp && node-gyp configure build)",
-    "build": "npm run build-rust && npm ru build-cpp"
+    "build-cpp-ffi": "(cd src/native-cpp-ffi && node-gyp configure build)",
+    "build": "npm run build-rust && npm run build-cpp && npm run build-cpp-ffi"
   },
   "author": "",
   "license": "ISC",

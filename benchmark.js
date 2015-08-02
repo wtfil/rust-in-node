@@ -1,22 +1,27 @@
 var Benchmark = require('benchmark');
 var suite = new Benchmark.Suite;
 var nativeRust = require('./src/native-rust');
+var nativeCppFfi = require('./src/native-cpp-ffi');
 var nativeCpp = require('./src/native-cpp');
 var vanilla = require('./src/vanilla');
 
 suite
-	.add('nativeRust.fibonacci(10)', function () {
+	.add('  nativeRust.fibonacci(10)', function () {
 		nativeRust.fibonacci(10);
 	})
-	.add('vanilla.fibonacci(10)', function () {
+	.add('     vanilla.fibonacci(10)', function () {
 		vanilla.fibonacci(10);
 	})
-	.add('nativeCpp.fibonacci(10)', function () {
+	.add('   nativeCpp.fibonacci(10)', function () {
 		nativeCpp.fibonacci(10);
+	})
+	.add('nativeCppFfi.fibonacci(10)', function () {
+		nativeCppFfi.fibonacci(10);
 	})
 	.on('complete', function () {
 		console.log(this[0].toString());
 		console.log(this[1].toString());
 		console.log(this[2].toString());
+		console.log(this[3].toString());
 	})
 	.run();
