@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build-rust": "(cd rust && cargo build --release)",
-    "build-cpp": "(cd src/addon && node-gyp configure build)",
+    "build-cpp": "(cd src/native-cpp && node-gyp configure build)",
     "build": "npm run build-rust && npm ru build-cpp"
   },
   "author": "",
