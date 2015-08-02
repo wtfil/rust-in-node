@@ -104,7 +104,7 @@ Then you can build module
     node-gyp configure build
 
 ## Install
-    git@github.com:wtfil/rust-in-node.git
+    git clone git@github.com:wtfil/rust-in-node.git
     cd rust-in-node
     npm install
     npm run build
