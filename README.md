@@ -1,6 +1,6 @@
 # rust-in-node
 This is an comparison of different methods of calling `Rust` code from `Node` with benchmarks.
-You should have [`node@4.x.x`](https://nodejs.org/download/) and [`rust@1.1.0`](http://www.rust-lang.org/) installed and [`node-gyp`](https://github.com/TooTallNate/node-gyp/) configured.
+You should have [`node@4.x.x`](https://nodejs.org/download/) and [`rust@1.1.0`](http://www.rust-lang.org/)+ installed and [`node-gyp`](https://github.com/TooTallNate/node-gyp/) configured.
 
 ## Methods
 There are few different ways to call rust from node. All of them are besed on `FFI` ([Foreign Function Interface](https://doc.rust-lang.org/book/ffi.html))
