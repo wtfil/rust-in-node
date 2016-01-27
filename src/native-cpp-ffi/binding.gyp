@@ -2,6 +2,9 @@
 	"targets": [{
 		"target_name": "addon",
 		"sources": ["addon.cc" ],
+        'include_dirs': [
+          '.',
+        ],
 		"conditions": [
 			['OS=="mac"', {
 				"libraries": [
@@ -10,7 +13,7 @@
 			}],
 			['OS=="win"', {
 				"libraries": [
-					"../../../rust/target/release/libembed.dll"
+					"../../../rust/target/release/embed.dll.lib"
 				]
 			}]
 		]
