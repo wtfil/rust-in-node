@@ -1,7 +1,10 @@
 #include <node.h>
-#include <addon.h>
 
 using namespace v8;
+
+extern "C" {
+	extern int32_t fibonacci(int32_t input);
+}
 
 void Method(const FunctionCallbackInfo<Value>& args) {
 	Isolate* isolate = Isolate::GetCurrent();
