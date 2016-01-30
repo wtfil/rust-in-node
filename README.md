@@ -113,6 +113,7 @@ Then you can build module
     node benchmark
 
 ## Results
+### MacOS
 ```
 vanilla.fibonacci(10)       x 950,929 ops/sec ±1.13% (91 runs sampled)
 nativeRustFFI.fibonacci(10) x 32,528 ops/sec ±2.11% (83 runs sampled)
@@ -121,6 +122,17 @@ nativeCppFFI.fibonacci(10)  x 1,825,865 ops/sec ±1.31% (89 runs sampled)
 ```
 
 As you can see the direct ffi call is to slow to have deal with it, but ffi + `C++` wrapper as fast as a native `C++` module, so `Rust` is good candidate for native modules for `Nodejs`
+
+### Windows
+(i5-4200U, win 10)
+```
+vanilla.fibonacci(10)       x 1,377,844 ops/sec ±0.16% (97 runs sampled)
+nativeRustFFI.fibonacci(10) x 339,064 ops/sec ±0.28% (102 runs sampled)
+nativeCpp.fibonacci(10)     x 2,698,431 ops/sec ±0.22% (100 runs sampled)
+nativeCppFFI.fibonacci(10)  x 4,479,237 ops/sec ±0.32% (98 runs sampled)
+```
+
+For some reason performance of a Rust lib connected to a C++ NodeJS extension via the C ABI is drastically faster. It is quite possibly that VC++ 2015 compiler is suboptimal.
 
 ## Building on windows
 Building on windows might be a challenging task, because `node-gyp` makes everyone
