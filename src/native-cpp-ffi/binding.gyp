@@ -6,6 +6,11 @@
           '.',
         ],
 		"conditions": [
+			['OS=="linux"', {
+				"libraries": [
+					"<(module_root_dir)/../../rust/target/release/libembed.so"
+				]
+			}],
 			['OS=="mac"', {
 				"libraries": [
 					"../../../rust/target/release/libembed.dylib"
