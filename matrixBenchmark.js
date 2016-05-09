@@ -15,20 +15,26 @@ var nativeCppFFI = require('./src/native-cpp-ffi');
 var nativeCpp = require('./src/native-cpp');
 var vanilla = require('./src/vanilla');
 
+var a = [
+	[1,1,1],
+	[1,1,1],
+	[1,1,1]
+];
+var b = [
+	[1,1,1],
+	[1,1,1],
+	[1,1,1]
+];
 suite
-	.add('vanilla.fibonacci(10)      ', function () {
-		vanilla.fibonacci(10);
+	.add('vanilla.matrixMultiplication  ', function () {
+		vanilla.matrixMultiplication(a, b);
 	})
-	.add('nativeRustFFI.fibonacci(10)', function () {
-		nativeRustFFI.fibonacci(10);
-	})
-	.add('nativeCpp.fibonacci(10)    ', function () {
-		nativeCpp.fibonacci(10);
-	})
-	.add('nativeCppFFI.fibonacci(10) ', function () {
-		nativeCppFFI.fibonacci(10);
+	.add('nativeCpp.matrixMultiplication', function () {
+		vanilla.matrixMultiplication(a, b);
 	})
 	.on('complete', function () {
 		this.forEach(item => console.log(item.toString()));
 	})
 	.run();
+
+return
