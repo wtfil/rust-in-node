@@ -16,6 +16,6 @@
     "ffi": "^2.0.0"
   },
   "devDependencies": {
-    "benchmark": "^1.0.0"
+    "benchmark": "^2.1.1"
   }
 }

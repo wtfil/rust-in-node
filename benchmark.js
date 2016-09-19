@@ -16,27 +16,23 @@ var nativeCpp = require('./src/native-cpp');
 var vanilla = require('./src/vanilla');
 var nativeRustNeon = require('./src/native-rust-neon');
 suite
-	.add('vanilla.fibonacci(10)', function () {
+	.add('vanilla.fibonacci(10)\t\t', function () {
 		vanilla.fibonacci(10);
 	})
-	.add('nativeRustFFI.fibonacci(10)', function () {
+	.add('nativeRustFFI.fibonacci(10)\t', function () {
 		nativeRustFFI.fibonacci(10);
 	})
-	.add('nativeCpp.fibonacci(10)    ', function () {
+	.add('nativeCpp.fibonacci(10)\t\t', function () {
 		nativeCpp.fibonacci(10);
 	})
-	.add('nativeCppFFI.fibonacci(10) ', function () {
+	.add('nativeCppFFI.fibonacci(10)\t', function () {
 		nativeCppFFI.fibonacci(10);
 	})
-	.add('nativeRustNeon.fibonacci(10) ', function () {
+	.add('nativeRustNeon.fibonacci(10)\t', function () {
 		nativeRustNeon.fibonacci(10);
 	})
 	.on('complete', function () {
-		console.log(this[0].toString());
-		console.log(this[1].toString());
-		console.log(this[2].toString());
-		console.log(this[3].toString());
-		console.log(this[4].toString());
+		this.forEach(item => console.log(item.toString()));
 	})
 	.run();
 
