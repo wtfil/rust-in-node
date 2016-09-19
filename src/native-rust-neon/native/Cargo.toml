@@ -1,0 +1,12 @@
+[package]
+name = "rsaddon"
+version = "0.1.0"
+authors = ["piaoger"]
+license = "MIT"
+
+[lib]
+name = "rsaddon"
+crate-type = ["dylib"]
+
+[dependencies]
+neon = "0.1"

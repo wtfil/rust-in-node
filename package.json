@@ -7,7 +7,8 @@
     "build-rust": "(cd rust && cargo build --release)",
     "build-cpp": "(cd src/native-cpp && node-gyp configure build)",
     "build-cpp-ffi": "(cd src/native-cpp-ffi && node-gyp configure build)",
-    "build": "npm run build-rust && npm run build-cpp && npm run build-cpp-ffi"
+    "build-rust-neon": "(cd src/native-rust-neon && npm install)",
+    "build": "npm run build-rust && npm run build-cpp && npm run build-cpp-ffi && npm run build-rust-neon"
   },
   "author": "",
   "license": "ISC",

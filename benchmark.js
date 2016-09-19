@@ -14,9 +14,9 @@ var nativeRustFFI = require('./src/native-rust-ffi');
 var nativeCppFFI = require('./src/native-cpp-ffi');
 var nativeCpp = require('./src/native-cpp');
 var vanilla = require('./src/vanilla');
-
+var nativeRustNeon = require('./src/native-rust-neon');
 suite
-	.add('vanilla.fibonacci(10)      ', function () {
+	.add('vanilla.fibonacci(10)', function () {
 		vanilla.fibonacci(10);
 	})
 	.add('nativeRustFFI.fibonacci(10)', function () {
@@ -28,10 +28,15 @@ suite
 	.add('nativeCppFFI.fibonacci(10) ', function () {
 		nativeCppFFI.fibonacci(10);
 	})
+	.add('nativeRustNeon.fibonacci(10) ', function () {
+		nativeRustNeon.fibonacci(10);
+	})
 	.on('complete', function () {
 		console.log(this[0].toString());
 		console.log(this[1].toString());
 		console.log(this[2].toString());
 		console.log(this[3].toString());
+		console.log(this[4].toString());
 	})
 	.run();
+
