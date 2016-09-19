@@ -114,11 +114,13 @@ Then you can build module
 
 ## Results
 ### MacOS
+(i5-4258U, EI Capitan 10.11.5)
 ```
-vanilla.fibonacci(10)       x 950,929 ops/sec ±1.13% (91 runs sampled)
-nativeRustFFI.fibonacci(10) x 32,528 ops/sec ±2.11% (83 runs sampled)
-nativeCpp.fibonacci(10)     x 1,820,482 ops/sec ±1.01% (93 runs sampled)
-nativeCppFFI.fibonacci(10)  x 1,825,865 ops/sec ±1.31% (89 runs sampled)
+vanilla.fibonacci(10)		 x 1,619,893 ops/sec ±2.52% (88 runs sampled)
+nativeRustFFI.fibonacci(10)	 x 221,780 ops/sec ±7.69% (78 runs sampled)
+nativeCpp.fibonacci(10)		 x 3,261,136 ops/sec ±4.91% (81 runs sampled)
+nativeCppFFI.fibonacci(10)	 x 3,936,481 ops/sec ±5.73% (84 runs sampled)
+nativeRustNeon.fibonacci(10)	 x 2,337,627 ops/sec ±4.08% (80 runs sampled)
 ```
 
 As you can see the direct ffi call is to slow to have deal with it, but ffi + `C++` wrapper as fast as a native `C++` module, so `Rust` is good candidate for native modules for `Nodejs`
