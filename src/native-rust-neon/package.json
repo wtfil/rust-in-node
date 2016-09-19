@@ -1,0 +1,14 @@
+{
+  "name": "embedneon",
+  "version": "0.1.0",
+  "description": "node.js addon written in rust & neon",
+  "main": "lib/index.js",
+  "author": "piaoger",
+  "license": "MIT",
+  "dependencies": {
+    "neon-cli": "^0.1.7"
+  },
+  "scripts": {
+    "install": "neon build"
+  }
+}
