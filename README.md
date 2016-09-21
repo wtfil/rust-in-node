@@ -116,11 +116,11 @@ Then you can build module
 ### MacOS
 (i5-4258U, EI Capitan 10.11.5)
 ```
-vanilla.fibonacci(10)		 x 1,619,893 ops/sec ±2.52% (88 runs sampled)
-nativeRustFFI.fibonacci(10)	 x 221,780 ops/sec ±7.69% (78 runs sampled)
-nativeCpp.fibonacci(10)		 x 3,261,136 ops/sec ±4.91% (81 runs sampled)
-nativeCppFFI.fibonacci(10)	 x 3,936,481 ops/sec ±5.73% (84 runs sampled)
-nativeRustNeon.fibonacci(10)	 x 2,337,627 ops/sec ±4.08% (80 runs sampled)
+vanilla.fibonacci(10)        x 1,619,893 ops/sec ±2.52% (88 runs sampled)
+nativeRustFFI.fibonacci(10)  x 221,780 ops/sec ±7.69% (78 runs sampled)
+nativeCpp.fibonacci(10)      x 3,261,136 ops/sec ±4.91% (81 runs sampled)
+nativeCppFFI.fibonacci(10)   x 3,936,481 ops/sec ±5.73% (84 runs sampled)
+nativeRustNeon.fibonacci(10) x 2,337,627 ops/sec ±4.08% (80 runs sampled)
 ```
 
 As you can see the direct ffi call is to slow to have deal with it, but ffi + `C++` wrapper as fast as a native `C++` module, so `Rust` is good candidate for native modules for `Nodejs`
@@ -143,6 +143,18 @@ nativeCpp.fibonacci(10)     x 4,646,598 ops/sec ±0.40% (100 runs sampled)
 nativeCppFFI.fibonacci(10)  x 5,235,762 ops/sec ±0.70% (100 runs sampled)
 ```
 
+### Linux
+(Intel® Xeon(R) CPU E5630 @ 2.53GHz × 8 ubuntu 16.04)
+
+```
+vanilla.fibonacci(10)        x 1,481,437 ops/sec ±0.93% (100 runs sampled)
+nativeRustFFI.fibonacci(10)  x 170,863 ops/sec ±0.46% (96 runs sampled)
+nativeCpp.fibonacci(10)      x 2,500,092 ops/sec ±0.22% (103 runs sampled)
+nativeCppFFI.fibonacci(10)   x 2,451,105 ops/sec ±0.93% (96 runs sampled)
+nativeRustNeon.fibonacci(10) x 2,405,373 ops/sec ±0.17% (97 runs sampled)
+
+
+```
 For some reason on Windows performance of a Rust lib connected to a C++ NodeJS extension via the C ABI is drastically faster. It is quite possibly that VC++ 2015 compiler is suboptimal. Rust + C++ is also faster on Ubuntu.
 
 ## Building on windows
