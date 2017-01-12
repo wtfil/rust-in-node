@@ -1,11 +1,11 @@
 # rust-in-node
-This is an comparison of different methods of calling `Rust` code from `Node` with benchmarks.
+This is a comparison of different methods of calling `Rust` code from `Node` with benchmarks.
 You should have [`node@4.x.x`](https://nodejs.org/download/) and [`rust@1.1.0`](http://www.rust-lang.org/)+ installed and [`node-gyp`](https://github.com/TooTallNate/node-gyp/) configured.
 
 ## Methods
-There are few different ways to call rust from node. All of them are based on `FFI` ([Foreign Function Interface](https://doc.rust-lang.org/book/ffi.html))
+There are a few different ways to call `Rust` from `Node`. All of them are based on `FFI` ([Foreign Function Interface](https://doc.rust-lang.org/book/ffi.html)).
 
-Minimal steps to create a dynamic library with rust
+### Minimal steps to create a dynamic library with `Rust`
 
     cargo new embed
     cd embed
@@ -15,28 +15,29 @@ Minimal steps to create a dynamic library with rust
 #[no_mangle]
 pub extern fn fibonacci(n: i32) -> i32 {
     return match n {
-        1 | 2 => 1,
+        0 => 0,
+        1 => 1,
         n => fibonacci(n - 1) + fibonacci(n - 2)
     }
 }
 ```
 
     edit Cargo.toml
-add to bottom
+Add to bottom:
 ```toml
 [lib]
 name = "embed"
 crate-type = ["dylib"]
 ```
 
-Then you can build the dynamic library
+Then you can build the dynamic library:
 
     cargo build --release
     ls target/release
-You can find `libembed.dylib` file on macOS (different for other architectures)
+You can now find a `libembed.dylib` file on macOS (different for other architectures).
 
 ### Direct ffi call
-You can call any dynamic library with [`node-ffi`](https://github.com/node-ffi/node-ffi) module using pure javascript only.
+You can call any dynamic library with [`node-ffi`](https://github.com/node-ffi/node-ffi) module using only `JavaScript`.
 
 ```js
 var ffi = require('ffi');
@@ -50,7 +51,7 @@ lib.fibonacci(10) // 89
 NOTE: path could be different
 
 ### Call dynamic library via c++ addon
-This is the most complicated way because you have to write a bit of `C++`. You can read more about native modules [`here`](https://nodejs.org/api/addons.html)
+This is the most complicated way because you have to write a bit of `C++`. You can read more about native modules [`here`](https://nodejs.org/api/addons.html).
 
     mkdir cpp-ffi
     cd cpp-ffi
@@ -99,7 +100,7 @@ NOTE: path could be different
 module.exports = require('./build/Release/addon');
 ```
 
-Then you can build module
+Then you can build the module:
 
     node-gyp configure build
 
@@ -123,7 +124,7 @@ nativeCppFFI.fibonacci(10)   x 3,936,481 ops/sec ±5.73% (84 runs sampled)
 nativeRustNeon.fibonacci(10) x 2,337,627 ops/sec ±4.08% (80 runs sampled)
 ```
 
-As you can see the direct ffi call is to slow to have deal with it, but ffi + `C++` wrapper as fast as a native `C++` module, so `Rust` is good candidate for native modules for `Nodejs`
+As you can see the direct ffi call is too slow to have deal with it, but ffi + `C++` wrapper is as fast as a native `C++` module, so `Rust` is a good candidate for native modules for `Node.js`.
 
 ### Windows
 (i5-4200U, Win 10)
@@ -152,30 +153,29 @@ nativeRustFFI.fibonacci(10)  x 170,863 ops/sec ±0.46% (96 runs sampled)
 nativeCpp.fibonacci(10)      x 2,500,092 ops/sec ±0.22% (103 runs sampled)
 nativeCppFFI.fibonacci(10)   x 2,451,105 ops/sec ±0.93% (96 runs sampled)
 nativeRustNeon.fibonacci(10) x 2,405,373 ops/sec ±0.17% (97 runs sampled)
-
-
 ```
-For some reason on Windows performance of a Rust lib connected to a C++ NodeJS extension via the C ABI is drastically faster. It is quite possibly that VC++ 2015 compiler is suboptimal. Rust + C++ is also faster on Ubuntu.
+
+For some reason on Windows performance of a `Rust` lib connected to a `C++` `Node.js` extension via the C ABI is drastically faster. It is quite possibly that VC++ 2015 compiler is suboptimal. `Rust` + `C++` is also faster on Ubuntu.
 
 ## Building on windows
-Building on windows might be a challenging task, because `node-gyp` makes everyone
-unhappy on windows.
+Building on Windows might be a challenging task, because `node-gyp` makes everyone
+unhappy on Windows.
 
 If everything is configured properly `npm run build` should just work.
 
-However it is likely to be broken. Try these steps if it is:
+However, it is likely to be broken. In that case try these steps:
 
-1. First ensure that you followed all windows installation instruction from README on https://github.com/nodejs/node-gyp
-2. Ensure that you using the same target for both Rust and C++. Rust should be
+1. First ensure that you followed all Windows installation instruction from README on https://github.com/nodejs/node-gyp
+2. Ensure that you using the same target for both `Rust` and `C++`. `Rust` should be
 compiled with MSVC target and target platform should be the same (ie i686/win32)
 3. Newer versions of [`Cargo`](https://github.com/rust-lang/cargo) produce `.dll.lib`
 files and older versions produce simply `.lib`. After building rust code please ensure
-that win embed lib name in `src\native-cpp-ffi\binding.gyp` match file names in `rust\target\release`.
-4. If you building only rust and native-cpp-ffi then you need to copy all
-libs compiled by cargo into directory of node addon. In this parcitular case:
+that win embed lib name in `src\native-cpp-ffi\binding.gyp` matches file names in `rust\target\release`.
+4. If you are building only `Rust` and `native-cpp-ffi` then you need to copy all
+libs compiled by Cargo into the directory of the Node addon. In this particular case:
 copy `rust/target/release/embed*` to `src/native-cpp-ffi/build/Release`
 
 
 ## Plans
-Test `Rust` module with multithreading. It could give even better result.
+Test `Rust` module with multi-threading. It could produce even better results.
 Feel free to add any other tests :)
