@@ -3,9 +3,9 @@ This is an comparison of different methods of calling `Rust` code from `Node` wi
 You should have [`node@4.x.x`](https://nodejs.org/download/) and [`rust@1.1.0`](http://www.rust-lang.org/)+ installed and [`node-gyp`](https://github.com/TooTallNate/node-gyp/) configured.
 
 ## Methods
-There are few different ways to call rust from node. All of them are besed on `FFI` ([Foreign Function Interface](https://doc.rust-lang.org/book/ffi.html))
+There are few different ways to call rust from node. All of them are based on `FFI` ([Foreign Function Interface](https://doc.rust-lang.org/book/ffi.html))
 
-Minimal steps to crete dynamic library with rust
+Minimal steps to create a dynamic library with rust
 
     cargo new embed
     cd embed
@@ -29,11 +29,11 @@ name = "embed"
 crate-type = ["dylib"]
 ```
 
-Then you can build dynamic library
+Then you can build the dynamic library
 
     cargo build --release
     ls target/release
-You can find `libembed.dylib` file on mac (or different of others architectures)
+You can find `libembed.dylib` file on macOS (different for other architectures)
 
 ### Direct ffi call
 You can call any dynamic library with [`node-ffi`](https://github.com/node-ffi/node-ffi) module using pure javascript only.
@@ -50,7 +50,7 @@ lib.fibonacci(10) // 89
 NOTE: path could be different
 
 ### Call dynamic library via c++ addon
-This is most complicate way because you have to write `c++` a bit. You can read more about native modules [`here`](https://nodejs.org/api/addons.html)
+This is the most complicated way because you have to write a bit of `C++`. You can read more about native modules [`here`](https://nodejs.org/api/addons.html)
 
     mkdir cpp-ffi
     cd cpp-ffi
